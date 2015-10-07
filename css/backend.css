@@ -1,0 +1,54 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+
+.theme-dropdown .dropdown-menu {
+    position: static;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+    margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+    width: auto;
+}
+
+#navbar .glyphicon {
+    font-size: 8pt;
+}
+
+#navbar li.btn {
+    padding: 0;
+    margin: 10px;
+}
+
+#navbar li.btn a {
+    color: white;
+    padding: 5px;
+}
+
+.tickets.row h3.panel-title {
+    text-align: right;
+}
+
+.panel-heading {
+    text-shadow: 1px 1px black;
+}
+
+.panel-title {
+    font-size: 15px;
+}
+
+.panel-success>.panel-heading {
+    background-color: #5CB85C;
+    border-color: #5CB85C;
+    color: white;
+}
+
+.btn.view-replies {
+    float:right;
+}
