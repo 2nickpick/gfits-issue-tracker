@@ -14,70 +14,85 @@ $ticket_count = rand( 3, 8 );
 <div class="page-header">
 	<h1>My Tickets (<?php echo $ticket_count; ?>)</h1>
 </div>
-<?php for ( $i = 0; $i < $ticket_count; $i ++ ) {
-	$random_timestamp = mt_rand( strtotime( 'Jan 15, 2012' ), strtotime( 'Jan 15, 2016' ) );
-	$open             = rand( 0, 10 ) % 2;
-	$content          = substr( $lorem_ipsum, rand( 0, 250 ), 150 ) . '...';
-	$reply_count      = rand( 0, 4 );
-	$id               = rand( 1, 100 );
-	?>
-	<?php
-	if ( $i % $column_count == 0 ) {
-		?>
-		<div class="tickets row">
+
+<div class="row search-tickets">
+	<div class="col-lg-6">
+		&nbsp;
+	</div><!-- /.col-lg-6 -->
+	<div class="col-lg-6">
+		<div class="input-group">
+			<input id="search" type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="BackEnd.searchTickets(jQuery('#search').val());">Go!</button>
+      </span>
+		</div><!-- /input-group -->
+	</div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-condensed tickets">
+		<thead>
+		<tr>
+			<th class="hidden-xs hidden-sm">
+				<a href="javascript:;"
+				   onclick="BackEnd.sortTickets('id')">ID #</a>
+			</th>
+			<th>
+				<a href="javascript:;"
+				   onclick="BackEnd.sortTickets('title')">Title</a>
+			</th>
+			<th>
+				<a href="javascript:;"
+				   onclick="BackEnd.sortTickets('submitted_by')">Submitted By</a>
+			</th>
+			<th class="hidden-xs hidden-sm">
+				<a href="javascript:;"
+				   onclick="BackEnd.sortTickets('date')">Date</a>
+			</th>
+			<th class="hidden-xs hidden-sm hidden-md">
+				<a href="javascript:;"
+				   onclick="BackEnd.sortTickets('last_reply')">Last Reply</a>
+			</th>
+		</tr>
+		</thead>
+		<tbody>
 		<?php
-	}
-	?>
-	<div class="col-sm-6">
-		<div class="panel panel-<?php echo $open ? 'primary' : 'success'; ?>">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					Submitted:
-					<strong>
-						<?php
-						echo date( 'M d, Y h:i A', $random_timestamp );
-						?>
-					</strong>
+		for ( $i = 0; $i < $ticket_count; $i ++ ) {
+			$random_timestamp   = mt_rand( strtotime( 'Jan 15, 2012' ), strtotime( 'Jan 15, 2016' ) );
+			$random_timestamp_2 = mt_rand( strtotime( 'Jan 15, 2012' ), strtotime( 'Jan 15, 2016' ) );
+			$open               = rand( 0, 10 ) % 2;
+			$title              = substr( $lorem_ipsum, rand( 0, 250 ), 50 ) . '...';
+			$reply_count        = rand( 0, 4 );
+			$submitted_by       = rand( 0, 1 ) % 2 == 0 ? 'Tester' : 'Tester 2';
+			$id                 = rand( 1, 100 );
+			$classes            = array();
+
+			if(!$open) {
+				$classes[] = 'success';
+			}
+			?>
+			<tr onclick="BackEnd.openTicket('<?php echo $id ?>');" class="<?php echo implode(' ', $classes) ?>">
+				<td class="hidden-xs hidden-sm">
 					<?php
 					if ( ! $open ) {
 						?>
 						<span title="Ticket is closed!" class="glyphicon glyphicon-ok"></span>
 						<?php
 					}
-					?>
-				</h3>
-			</div>
-			<div class="panel-body">
-				<div class="well">
-					<p><?php echo $content; ?></p>
-				</div>
-				<a href="/group4/secure/ticket.php?tickets_id=<?php echo $id ?>" class="btn btn-default view-replies">
-					View Ticket
-					<?php
-					if ( $reply_count > 0 ) {
-						?>
-						<span class="badge">
-								<?php
-								echo $reply_count . ' ' . ( $reply_count > 1 ? 'Replies' : 'Reply' ); ?>
-							</span>
-						<?php
-					}
-					?>
-					&raquo;
-				</a>
-			</div>
-		</div>
-	</div>
-	<?php
-	if ( $i % $column_count == $column_count - 1 || $i == $ticket_count - 1 ) {
-		?>
-		</div>
-		<!-- /.col-sm-6 -->
-		<?php
-	}
-	?>
-	<?php
-}
-?>
 
+					echo $id;
+
+					?>
+				</td>
+				<td class="title"><?php echo $title ?></td>
+				<td><?php echo $submitted_by; ?></td>
+				<td class="hidden-xs hidden-sm "><?php echo date( 'M d, Y h:i A', $random_timestamp ); ?></td>
+				<td class="hidden-xs hidden-sm hidden-md"><?php echo date( 'M d, Y h:i A', $random_timestamp_2 ); ?></td>
+			</tr>
+			<?php
+		}
+		?>
+		</tbody>
+	</table>
+</div>
 <?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/foot.php' ); ?>

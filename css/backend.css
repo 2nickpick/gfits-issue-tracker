@@ -70,3 +70,11 @@ body {
 .username {
     font-style: italic;
 }
+
+.table-hover tr:hover {
+    cursor: pointer;
+}
+
+.row.search-tickets {
+    margin-bottom: 30px;
+}

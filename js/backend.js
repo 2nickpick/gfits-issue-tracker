@@ -67,6 +67,20 @@ var BackEnd = {
                 jQuery('#seconds-left').html(seconds);
             }
         }, 1000);
+    },
+
+    openTicket: function(tickets_id) {
+        window.location.href = '/group4/secure/ticket.php?tickets_id='+tickets_id;
+    },
+
+    sortTickets: function(order_by) {
+        // ajax load in the list ordered appropriately
+        console.log('Sorting table by ' + order_by + '...');
+    },
+
+    searchTickets: function(search_term) {
+        // ajax load in the list by key term
+        console.log('Searching table by ' + search_term + '...');
     }
 };
 
