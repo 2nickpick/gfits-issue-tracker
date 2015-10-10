@@ -52,3 +52,21 @@ body {
 .btn.view-replies {
     float:right;
 }
+
+.form {
+    max-width: 600px;
+}
+
+.profile-picture {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+#seconds-left {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.username {
+    font-style: italic;
+}

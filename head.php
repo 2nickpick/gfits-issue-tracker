@@ -34,7 +34,6 @@
 							<ul class="nav masthead-nav">
 								<li><a href="/group4/index.php">Home</a></li>
 								<li><a href="/group4/contact-us.php">Contact Us</a></li>
-								<li><a href="/group4/log-in.php">Log In</a></li>
 							</ul>
 						</nav>
 					</div>

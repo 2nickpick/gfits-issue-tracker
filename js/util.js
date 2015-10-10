@@ -8,5 +8,17 @@ var Util = {
                     jQuery(selector).removeClass();
                 }
             );
+    },
+
+    setActiveMenuItem: function() {
+        var pathname = window.location.pathname;
+
+        if(pathname.indexOf('.php', pathname.length - '.php'.length) === -1) {
+            pathname += 'index.php';
+        }
+
+        jQuery('a[href="' + pathname + '"]')
+            .parents('li,ul')
+            .addClass('active');
     }
 };

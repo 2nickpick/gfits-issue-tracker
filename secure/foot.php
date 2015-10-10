@@ -1,3 +1,10 @@
+<div class="well text-center">
+		<span>
+			Developed by Group 4, Internet Programming - University of North Florida
+		</span>
+</div>
+
+</div> <!-- /container -->
 
 <!-- jQuery, Bootstrap, and other page scripts -->
 <!-- Placed at the end of the document so the pages load faster -->

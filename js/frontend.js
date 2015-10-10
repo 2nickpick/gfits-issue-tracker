@@ -1,12 +1,6 @@
 var FrontEnd = {
     init: function() {
-        this.setActiveMenuItem();
-    },
-
-    setActiveMenuItem: function() {
-        jQuery('a[href="' + window.location.pathname + '"]')
-            .parents('li,ul')
-            .addClass('active');
+        Util.setActiveMenuItem();
     },
 
     logIn: function() {

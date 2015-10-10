@@ -6,7 +6,7 @@
 	<p class="lead">GFITS is the perfect solution to your issue tracking needs.</p>
 
 	<p class="lead">
-		<a href="/group4/sign-up.php" class="btn btn-lg btn-default">Try it now!</a>
+		<a href="/group4/sign-up.php" class="btn btn-lg btn-primary">Try it now!</a>
 	</p>
 </div>
 
