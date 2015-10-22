@@ -1,0 +1,142 @@
+SSH Secure Shell 3.2.9 (Build 283)
+Copyright (c) 2000-2003 SSH Communications Security Corp - http://www.ssh.com/
+
+This copy of SSH Secure Shell is a non-commercial version.
+This version does not include PKI and PKCS #11 functionality.
+
+
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.13.0-32-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+  System information as of Tue Oct 13 22:02:17 EDT 2015
+
+  System load:  0.0               Processes:           102
+  Usage of /:   2.0% of 94.37GB   Users logged in:     1
+  Memory usage: 8%                IP address for eth0: 192.168.100.66
+  Swap usage:   0%
+
+  Graph this data and manage this system at:
+    https://landscape.canonical.com/
+
+92 packages can be updated.
+50 updates are security updates.
+
+Last login: Tue Oct 13 22:08:33 2015 from 192.168.100.52
+group4@cop4813:~$ mysql -u group4 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 841
+Server version: 5.5.44-0ubuntu0.14.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use group4
+Database changed
+mysql> source /database/SQLScript-InsertRecords.sql;
+ERROR: 
+Failed to open file '/database/SQLScript-InsertRecords.sql', error: 2
+mysql> source /home/group4/public_html/database/SQLScript-InsertRecords.sql;
+ERROR 1146 (42S02): Table 'group4.tCellPhoneCarrier' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tUser' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tCategory' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tStatus' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tType' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tLogin' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tTicket' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tTicketAttachment' doesn't exist
+ERROR 1146 (42S02): Table 'group4.tTicketNote' doesn't exist
+mysql> source /home/group4/public_html/database/SQLScript-CreateTables.sql;
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> source /home/group4/public_html/database/SQLScript-InsertRecords.sql;
+Query OK, 8 rows affected (0.00 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> source /home/group4/public_html/database/SQLScript-Verify.sql;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SELECT u.UserID, u.FirstName, u.LastName, u.EmailAddress, u.PhoneNumber, 
+CONCAT' at line 14
+mysql> select * from tUser;
++--------+-----------+-----------+-----------------------+-------------+--------------------+
+| UserID | FirstName | LastName  | EmailAddress          | PhoneNumber | CellPhoneCarrierID |
++--------+-----------+-----------+-----------------------+-------------+--------------------+
+|      1 | Cici      | Carter    | cici.carter@gmail.com | 4048223909  |                  6 |
+|      2 | Nick      | Pickering | 2NickPick@gmail.com   | NULL        |               NULL |
+|      3 | Ima       | User      | test@test.com         | NULL        |               NULL |
++--------+-----------+-----------+-----------------------+-------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tTicket
+    -> ;
++----------+------------+----------+---------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+| TicketID | CategoryID | OpenedBy | DateOpened          | IssueTitle                         | Description                                                                                                                                |
++----------+------------+----------+---------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+|        1 |          1 |        3 | 2015-10-13 22:27:53 | Unable to get into web application | When I try to log on to the web app, I get the error <quote>Error occurred while processing your request.</quote>. Please see attachments. |
++----------+------------+----------+---------------------+------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> source /home/group4/public_html/database/SQLScript-Verify.sql;
++--------+-----------+----------+---------------+------------+---------------------+--------+------------+--------------------------------------+----------+---------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| UserID | FirstName | LastName | EmailAddress  | Passwd     | LastPasswordChange  | TypeID | TypeName   | TypeDescription                      | TicketID | DateOpened          | CategoryDescription | TicketAttachmentURL                                                                                                                                                                      |
++--------+-----------+----------+---------------+------------+---------------------+--------+------------+--------------------------------------+----------+---------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|      3 | Ima       | User     | test@test.com | MyTest1234 | 2015-10-13 22:27:53 |      1 | SUBSCRIBER | Regular user with minimal privileges |        1 | 2015-10-13 22:27:53 | Web                 | https://acomdpsstorage.blob.core.windows.net/dpsmedia-prod/azure.microsoft.com/en-us/documentation/articles/web-sites-dotnet-troubleshoot-visual-studio/20150928044904/genericerror1.png |
++--------+-----------+----------+---------------+------------+---------------------+--------+------------+--------------------------------------+----------+---------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
++--------+-----------+-----------+-----------------------+-------------+------------------------+----------+----------+-------------------+--------------+---------------------+--------------------------------------------------------------------------------------------------+
+| UserID | FirstName | LastName  | EmailAddress          | PhoneNumber | TextAddress            | TicketID | StatusID | StatusDescription | TicketNoteID | NoteDate            | NoteText                                                                                         |
++--------+-----------+-----------+-----------------------+-------------+------------------------+----------+----------+-------------------+--------------+---------------------+--------------------------------------------------------------------------------------------------+
+|      3 | Ima       | User      | test@test.com         | NULL        | NULL                   |        1 |        1 | OPEN              |            1 | 2015-10-13 22:27:53 | New ticket created.                                                                              |
+|      3 | Ima       | User      | test@test.com         | NULL        | NULL                   |        1 |        2 | IN PROGRESS       |            2 | 2015-10-13 22:27:53 | New attachment added.                                                                            |
+|      1 | Cici      | Carter    | cici.carter@gmail.com | 4048223909  | 4048223909@tmomail.net |        1 |        2 | IN PROGRESS       |            3 | 2015-10-13 22:27:53 | This appears to be the only user affected. Troubleshooting further.                              |
+|      2 | Nick      | Pickering | 2NickPick@gmail.com   | NULL        | NULL                   |        1 |        2 | IN PROGRESS       |            4 | 2015-10-13 22:27:53 | User called the help desk asking for a status on this ticket. Checking with previous technician. |
+|      1 | Cici      | Carter    | cici.carter@gmail.com | 4048223909  | 4048223909@tmomail.net |        1 |        3 | RESOLVED          |            5 | 2015-10-13 22:27:53 | Modified host file, which fixed this problem.                                                    |
+|      3 | Ima       | User      | test@test.com         | NULL        | NULL                   |        1 |        5 | CLOSED            |            6 | 2015-10-13 22:27:53 | Resolution confirmed by user. Ticket closed.                                                     |
++--------+-----------+-----------+-----------------------+-------------+------------------------+----------+----------+-------------------+--------------+---------------------+--------------------------------------------------------------------------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> 
