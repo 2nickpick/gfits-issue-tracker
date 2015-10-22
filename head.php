@@ -12,15 +12,15 @@
 	<title>GFITS - Group Four Issue Tracking System</title>
 
 	<!-- Bootstrap core CSS -->
-	<link href="/group4/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/~group4/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Project-specific CSS -->
-	<link href="/group4/vendor/animate.css" rel="stylesheet">
-	<link rel="stylesheet" href="/group4/css/style.css" />
-	<link rel="stylesheet" href="/group4/css/frontend.css"/>
+	<link href="/~group4/vendor/animate.css" rel="stylesheet">
+	<link rel="stylesheet" href="/~group4/css/style.css" />
+	<link rel="stylesheet" href="/~group4/css/frontend.css"/>
 
 	<!-- Favicons -->
-	<link rel="icon" href="/group4/favicon.ico">
+	<link rel="icon" href="/~group4/favicon.ico">
 
 </head>
 <body>
@@ -29,11 +29,11 @@
 			<div class="cover-container">
 				<div class="masthead clearfix">
 					<div class="inner">
-						<h3 class="masthead-brand"><a href="/group4/">GFITS</a></h3>
+						<h3 class="masthead-brand"><a href="/~group4/">GFITS</a></h3>
 						<nav>
 							<ul class="nav masthead-nav">
-								<li><a href="/group4/index.php">Home</a></li>
-								<li><a href="/group4/contact-us.php">Contact Us</a></li>
+								<li><a href="/~group4/index.php">Home</a></li>
+								<li><a href="/~group4/contact-us.php">Contact Us</a></li>
 							</ul>
 						</nav>
 					</div>

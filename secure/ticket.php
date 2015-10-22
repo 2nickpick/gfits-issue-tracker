@@ -1,11 +1,12 @@
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/head.php' ); ?>
+<?php include( '../config.inc.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
 
 <?php
 
 if ( empty( $_GET['tickets_id'] ) ) {
 	?>
 	<div class="alert alert-danger">
-		Ticket was not found! <a href="/group4/secure/dashboard.php">Back to Dashboard</a>
+		Ticket was not found! <a href="/~group4/secure/dashboard.php">Back to Dashboard</a>
 	</div>
 	<?php
 } else {
@@ -32,7 +33,7 @@ if ( empty( $_GET['tickets_id'] ) ) {
 	<div class="row">
 		<div class="well clearfix">
 			<div class="col-sm-2 text-center">
-				<img class="profile-picture" src="/group4/images/shelgon.png"/>
+				<img class="profile-picture" src="/~group4/images/shelgon.png"/>
 
 				<p><strong>Tester</strong></p>
 
@@ -56,7 +57,7 @@ if ( empty( $_GET['tickets_id'] ) ) {
 		<div class="row">
 			<div class="well clearfix">
 				<div class="col-sm-2 text-center">
-					<img class="profile-picture" src="/group4/images/psyduck.jpg"/>
+					<img class="profile-picture" src="/~group4/images/psyduck.jpg"/>
 
 					<p><strong>Staff Member</strong></p>
 
@@ -94,7 +95,7 @@ if ( empty( $_GET['tickets_id'] ) ) {
 
 		<div class="row">
 			<div class="col-sm-2">
-				<img class="profile-picture" src="/group4/images/shelgon.png"/>
+				<img class="profile-picture" src="/~group4/images/shelgon.png"/>
 			</div>
 			<div class="col-sm-6">
 				<label for="inputName">Name</label>
@@ -115,17 +116,17 @@ if ( empty( $_GET['tickets_id'] ) ) {
 				<?php
 				if(! $closed ) {
 					?>
-					<button class="btn btn-lg btn-success btn-block" type="submit">Submit and Close</button>
+					<button class="btn btn-lg btn-success btn-block" type="submit">Add Note and Close Ticket</button>
 					<?php
 				} else {
 					?>
-					<button class="btn btn-lg btn-warning btn-block" type="submit">Submit and Reopen</button>
+					<button class="btn btn-lg btn-warning btn-block" type="submit">Add Note and Reopen Ticket</button>
 					<?php
 				}
 				?>
 			</div>
 			<div class="col-sm-6">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Add Note</button>
 			</div>
 		</div>
 
@@ -134,4 +135,4 @@ if ( empty( $_GET['tickets_id'] ) ) {
 }
 
 ?>
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/foot.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>

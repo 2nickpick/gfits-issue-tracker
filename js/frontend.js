@@ -10,7 +10,7 @@ var FrontEnd = {
             Util.animate('#errors-container', 'shake');
         } else {
             // successfully logged in
-            window.location.href = '/group4/secure/dashboard.php';
+            window.location.href = '/~group4/secure/dashboard.php';
         }
     },
 
@@ -21,7 +21,7 @@ var FrontEnd = {
             Util.animate('#errors-container', 'shake');
         } else {
             // successfully logged in
-            window.location.href = '/group4/sign-up-thanks.php';
+            window.location.href = '/~group4/sign-up-thanks.php';
         }
     },
 
@@ -32,7 +32,7 @@ var FrontEnd = {
             Util.animate('#errors-container', 'shake');
         } else {
             // successfully logged in
-            window.location.href = '/group4/contact-us-thanks.php';
+            window.location.href = '/~group4/contact-us-thanks.php';
         }
     }
 };

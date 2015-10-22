@@ -1,4 +1,5 @@
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/head.php' ); ?>
+<?php include( '../config.inc.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
 
 <?php
 
@@ -95,4 +96,4 @@ $ticket_count = rand( 3, 8 );
 		</tbody>
 	</table>
 </div>
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/foot.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>

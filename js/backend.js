@@ -38,7 +38,7 @@ var BackEnd = {
         } else {
             // successfully logged in
             var ticket_id = Math.floor((Math.random() * 100) + 1).toString();
-            window.location.href = '/group4/secure/ticket.php?tickets_id=' + ticket_id;
+            window.location.href = '/~group4/secure/ticket.php?tickets_id=' + ticket_id;
         }
     },
 
@@ -54,14 +54,14 @@ var BackEnd = {
         } else {
             // successfully logged in
             var ticket_id = Math.floor((Math.random() * 100) + 1).toString();
-            window.location.href = '/group4/secure/ticket.php?tickets_id=' + ticket_id;
+            window.location.href = '/~group4/secure/ticket.php?tickets_id=' + ticket_id;
         }
     },
 
     logOutWait: function(seconds) {
         setInterval(function() {
             if(seconds == 0) {
-                window.location.href = '/group4/';
+                window.location.href = '/~group4/';
             } else {
                 seconds--;
                 jQuery('#seconds-left').html(seconds);
@@ -70,7 +70,7 @@ var BackEnd = {
     },
 
     openTicket: function(tickets_id) {
-        window.location.href = '/group4/secure/ticket.php?tickets_id='+tickets_id;
+        window.location.href = '/~group4/secure/ticket.php?tickets_id='+tickets_id;
     },
 
     sortTickets: function(order_by) {

@@ -1,4 +1,5 @@
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/head.php' ); ?>
+<?php include( '../config.inc.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
 
 <div class="page-header">
 	<h1>My Account</h1>
@@ -26,7 +27,7 @@
 
 	<h3>Profile Picture</h3>
 	<h4>Preview</h4>
-	<img class="profile-picture" src="/group4/images/shelgon.png" />
+	<img class="profile-picture" src="/~group4/images/shelgon.png" />
 	<label for="inputName" class="sr-only">Name</label>
 	<input type="file" id="inputProfilePicture" class="form-control">
 
@@ -39,4 +40,4 @@
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Update Profile</button>
 </form>
 
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/foot.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>

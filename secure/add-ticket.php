@@ -1,4 +1,5 @@
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/head.php' ); ?>
+<?php include( '../config.inc.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
 
 <div class="page-header">
 	<h1>My Account</h1>
@@ -22,7 +23,7 @@
 
 	<div class="row">
 		<div class="col-sm-2">
-			<img class="profile-picture" src="/group4/images/shelgon.png" />
+			<img class="profile-picture" src="/~group4/images/shelgon.png" />
 		</div>
 		<div class="col-sm-6">
 			<label for="inputName">Created By</label>
@@ -42,4 +43,4 @@
 
 </form>
 
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/foot.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>

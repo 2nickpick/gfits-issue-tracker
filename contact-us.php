@@ -1,4 +1,5 @@
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/head.php' ); ?>
+<?php include( 'config.inc.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/head.php' ); ?>
 
 <div class="inner">
 	<form class="form" onsubmit="FrontEnd.contactUs(); return false;">
@@ -20,4 +21,4 @@
 	</form>
 </div> <!-- inner -->
 
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/foot.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/foot.php' ); ?>

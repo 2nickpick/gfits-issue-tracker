@@ -1,4 +1,5 @@
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/head.php' ); ?>
+<?php include( '../config.inc.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
 
 <div class="page-header">
 	<h1>Log Out</h1>
@@ -13,4 +14,4 @@
 		BackEnd.logOutWait(3);
 	};
 </script>
-<?php include( $_SERVER['DOCUMENT_ROOT'] . '/group4/secure/foot.php' ); ?>
+<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>
