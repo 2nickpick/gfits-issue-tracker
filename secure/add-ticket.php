@@ -1,5 +1,4 @@
-<?php include( '../config.inc.php' ); ?>
-<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
+<?php include( 'head.php' ); ?>
 
 <div class="page-header">
 	<h1>My Account</h1>
@@ -23,7 +22,7 @@
 
 	<div class="row">
 		<div class="col-sm-2">
-			<img class="profile-picture" src="/~group4/images/shelgon.png" />
+			<img class="profile-picture" src="/~group4/images/shelgon.png"/>
 		</div>
 		<div class="col-sm-6">
 			<label for="inputName">Created By</label>
@@ -31,16 +30,20 @@
 		</div>
 		<div class="col-sm-4">
 			<label for="inputDate">Date</label>
-			<input type="text" id="inputDate" class="form-control" value="<?php echo date('M d, Y') ?>" disabled required autofocus>
+			<input type="text" id="inputDate" class="form-control" value="<?php echo date( 'M d, Y' ) ?>" disabled
+			       required autofocus>
 		</div>
 	</div>
 
-		<label for="inputMessage">Please describe your issue here:</label>
-		<textarea id="inputMessage" class="form-control" required ></textarea>
+	<label for="inputMessage">Please describe your issue here:</label>
+	<textarea id="inputMessage" class="form-control" required></textarea>
 
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit New Ticket</button>
+	<label for="inputAttachment">Attachment (optional):</label>
+	<input id="inputAttachment" type="file" name="attachment" class="form-control" />
+
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Submit New Ticket</button>
 
 
 </form>
 
-<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

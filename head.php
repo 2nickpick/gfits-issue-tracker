@@ -1,3 +1,4 @@
+<?php include( 'config.inc.php' ); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

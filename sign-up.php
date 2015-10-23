@@ -1,5 +1,4 @@
-<?php include( 'config.inc.php' ); ?>
-<?php include( DOCUMENT_ROOT . '/head.php' ); ?>
+<?php include( 'head.php' ); ?>
 
 <div class="inner">
 	<form class="form" onsubmit="FrontEnd.signUp(); return false;">
@@ -23,4 +22,4 @@
 	</form>
 </div> <!-- inner -->
 
-<?php include( DOCUMENT_ROOT . '/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

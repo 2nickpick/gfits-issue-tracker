@@ -3,7 +3,7 @@
 global $currentUser;
 
 if(empty($currentUser)) {
-	header('Location: /log-in.php');
+	header('Location: /~group4/log-in.php');
 	exit();
 }
 

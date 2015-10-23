@@ -1,5 +1,4 @@
-<?php include( 'config.inc.php' ); ?>
-<?php include( DOCUMENT_ROOT . '/head.php' ); ?>
+<?php include( 'head.php' ); ?>
 
 <div class="inner">
 	<h2>Message Received!</h2>
@@ -10,4 +9,4 @@
 	</p>
 </div> <!-- inner -->
 
-<?php include( DOCUMENT_ROOT . '/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

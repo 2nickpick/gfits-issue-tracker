@@ -1,5 +1,4 @@
-<?php include( '../config.inc.php' ); ?>
-<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
+<?php include( 'head.php' ); ?>
 
 <?php
 
@@ -111,6 +110,9 @@ if ( empty( $_GET['tickets_id'] ) ) {
 		<label for="inputMessage">Add a message to this ticket:</label>
 		<textarea id="inputMessage" class="form-control" required></textarea>
 
+		<label for="inputAttachment">Attachment (optional):</label>
+		<input id="inputAttachment" type="file" name="attachment" class="form-control" />
+
 		<div class="row">
 			<div class="col-sm-6">
 				<?php
@@ -135,4 +137,4 @@ if ( empty( $_GET['tickets_id'] ) ) {
 }
 
 ?>
-<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

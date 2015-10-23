@@ -1,5 +1,4 @@
-<?php include( 'config.inc.php' ); ?>
-<?php include( DOCUMENT_ROOT . '/head.php' ); ?>
+<?php include( 'head.php' ); ?>
 
 <div class="inner cover">
 	<h1 class="cover-heading">Welcome to GFITS!</h1>
@@ -12,4 +11,4 @@
 	</p>
 </div>
 
-<?php include( DOCUMENT_ROOT . '/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

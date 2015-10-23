@@ -1,5 +1,8 @@
-<?php include( '../config.inc.php' ); ?>
-<?php include( DOCUMENT_ROOT . '/secure/head.php' ); ?>
+<?php include( 'head.php' ); ?>
+<?php
+	global $currentUser;
+	unset($_SESSION['users_id']);
+?>
 
 <div class="page-header">
 	<h1>Log Out</h1>
