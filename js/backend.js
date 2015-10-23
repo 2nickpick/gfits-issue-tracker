@@ -81,6 +81,62 @@ var BackEnd = {
     searchTickets: function(search_term) {
         // ajax load in the list by key term
         console.log('Searching table by ' + search_term + '...');
+    },
+
+    addUserForm: function() {
+        window.location.href = '/~group4/secure/add-user.php';
+    },
+
+    addUser: function() {
+
+        jQuery('#success-container').hide();
+        jQuery('#errors-container').hide();
+
+        jQuery('html, body').animate({
+            scrollTop: 0
+        }, 250);
+
+        if(jQuery('#inputMessage').val().length <= 10) {
+            // log in failed
+            jQuery('#errors-container').show();
+            Util.animate('#errors-container', 'shake');
+        } else {
+            // successfully logged in
+            var users_id = Math.floor((Math.random() * 100) + 1).toString();
+            window.location.href = '/~group4/secure/user.php?users_id=' + users_id;
+        }
+    },
+
+
+    openUser: function(users_id) {
+        window.location.href = '/~group4/secure/user.php?users_id='+users_id;
+    },
+
+    updateUser: function() {
+
+        jQuery('#success-container').hide();
+        jQuery('#errors-container').hide();
+
+        if(jQuery('#inputMessage').val().length <= 10) {
+            // log in failed
+            jQuery('#errors-container').show();
+            Util.animate('#errors-container', 'shake');
+        } else {
+            // successfully logged in
+            var ticket_id = Math.floor((Math.random() * 100) + 1).toString();
+            window.location.href = '/~group4/secure/ticket.php?tickets_id=' + ticket_id;
+        }
+    },
+
+    sortUsers: function(order_by) {
+        // ajax load in the list ordered appropriately
+        console.log('Sorting users by ' + order_by + '...');
+    },
+
+
+    searchUsers: function(search_term) {
+        // ajax load in the list by key term
+        console.log('Searching users by ' + search_term + '...');
     }
 };
 

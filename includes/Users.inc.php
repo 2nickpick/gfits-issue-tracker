@@ -191,6 +191,15 @@ class User {
 	}
 
 	/**
+	 * @return Type
+	 */
+	public function getType() {
+		$type = Type::loadById( $this->type_id );
+
+		return $type;
+	}
+
+	/**
 	 * @return mixed
 	 */
 	public function getTypeId() {
@@ -219,3 +228,237 @@ class User {
 	}
 
 }
+
+class Type {
+	protected $id;
+	protected $name;
+	protected $description;
+
+	/**
+	 * @param $types_id
+	 *
+	 * @return Type
+	 */
+	public static function loadById( $types_id ) {
+		$data = array( ':types_id' => $types_id );
+
+		return self::loadAll( 'tType.TypeID = :types_id', $data, false );
+	}
+
+	/**
+	 * @param string $where - WHERE of the sql query
+	 * @param array $data - sql values to bind to the prepared query
+	 *
+	 * @return array
+	 */
+	public static function loadAll( $where = '', $data = array(), $return_array = true ) {
+		global $con;
+
+		if ( ! empty( $where ) ) {
+			$where = ' WHERE ' . $where;
+		}
+
+		$sql =
+			'SELECT
+                tType.TypeID,
+                TypeName,
+                Description
+            FROM tType
+            ' . $where . '';
+
+		$statement = $con->prepare( $sql );
+		$statement->execute( $data );
+
+		$rows = $statement->fetchAll();
+
+		$types = array();
+		if ( ! empty( $rows ) ) {
+			foreach ( $rows as $row ) {
+				$type = new Type(
+					array(
+						'id'          => $row['TypeID'],
+						'name'        => $row['TypeName'],
+						'description' => $row['Description'],
+					)
+				);
+
+				if ( ! $return_array ) {
+					return $type;
+				}
+
+				$types[] = $type;
+			}
+		}
+
+		return $types;
+	}
+
+	public function __construct( $properties = array() ) {
+		if ( ! empty( $properties ) ) {
+			foreach ( $properties as $property => $value ) {
+				$this->{$property} = $value;
+			}
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @param mixed $id
+	 */
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * @param mixed $name
+	 */
+	public function setName( $name ) {
+		$this->name = $name;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * @param mixed $description
+	 */
+	public function setDescription( $description ) {
+		$this->description = $description;
+	}
+
+}
+
+class CellPhoneCarrier {
+	protected $id;
+	protected $name;
+	protected $email_domain;
+
+	/**
+	 * @param $carriers_id
+	 *
+	 * @return Type
+	 */
+	public static function loadById( $carriers_id ) {
+		$data = array( ':carriers_id' => $carriers_id );
+
+		return self::loadAll( 'tCellPhoneCarrier.CellPhoneCarrierId = :carriers_id', $data, false );
+	}
+
+	/**
+	 * @param string $where - WHERE of the sql query
+	 * @param array $data - sql values to bind to the prepared query
+	 *
+	 * @return array
+	 */
+	public static function loadAll( $where = '', $data = array(), $return_array = true ) {
+		global $con;
+
+		if ( ! empty( $where ) ) {
+			$where = ' WHERE ' . $where;
+		}
+
+		$sql =
+			'SELECT
+                tCellPhoneCarrier.CellPhoneCarrierID,
+                CellPhoneCarrierName,
+                CellPhoneCarrierEmailDom
+            FROM tCellPhoneCarrier
+            ' . $where . '';
+
+		$statement = $con->prepare( $sql );
+		$statement->execute( $data );
+
+		$rows = $statement->fetchAll();
+
+		$carriers = array();
+		if ( ! empty( $rows ) ) {
+			foreach ( $rows as $row ) {
+				$carrier = new CellPhoneCarrier(
+					array(
+						'id'           => $row['CellPhoneCarrierID'],
+						'name'         => $row['CellPhoneCarrierName'],
+						'email_domain' => $row['CellPhoneCarrierEmailDom'],
+					)
+				);
+
+				if ( ! $return_array ) {
+					return $carrier;
+				}
+
+				$carriers[] = $carrier;
+			}
+		}
+
+		return $carriers;
+	}
+
+	public function __construct( $properties = array() ) {
+		if ( ! empty( $properties ) ) {
+			foreach ( $properties as $property => $value ) {
+				$this->{$property} = $value;
+			}
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @param mixed $id
+	 */
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * @param mixed $name
+	 */
+	public function setName( $name ) {
+		$this->name = $name;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getEmailDomain() {
+		return $this->email_domain;
+	}
+
+	/**
+	 * @param mixed $email_domain
+	 */
+	public function setEmailDomain( $email_domain ) {
+		$this->email_domain = $email_domain;
+	}
+
+}
+
+

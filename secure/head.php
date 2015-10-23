@@ -1,3 +1,7 @@
+<?php
+	include('../config.inc.php');
+	include('../includes/secure.inc.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +41,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/~group4/secure/dashboard.php">GFITS</a>
-				<p class="navbar-text">Welcome back, <span class="username">Tester</span>!</p>
+				<p class="navbar-text">Welcome back, <span class="username"><?php echo $currentUser->getFirstName() ?></span>!</p>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -47,6 +51,15 @@
 						</a>
 					</li>
 					<li role="separator" class="divider"></li>
+					<li><a href="/~group4/secure/dashboard.php">Tickets</a></li>
+					<?php
+					if($currentUser->getTypeId() == 3) { // is admin
+						?>
+						<li><a href="/~group4/secure/users.php">Users</a></li>
+						<li role="separator" class="divider"></li>
+						<?php
+					}
+					?>
 					<li><a href="/~group4/secure/my-account.php">My Account</a></li>
 					<li><a href="/~group4/secure/log-out.php">Log Out</a></li>
 				</ul>
