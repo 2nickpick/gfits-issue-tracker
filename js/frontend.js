@@ -4,7 +4,7 @@ var FrontEnd = {
     },
 
     logIn: function() {
-        data = {
+        var data = {
             email: jQuery('#inputEmail').val(),
             password: jQuery('#inputPassword').val()
         };
@@ -18,7 +18,6 @@ var FrontEnd = {
                 window.location.href = '/~group4/secure/dashboard.php';
             } else {
                 // log in failed
-                console.log(response);
                 jQuery('#errors-container .alert').html(response.error);
                 jQuery('#errors-container').show();
                 Util.animate('#errors-container', 'shake');
@@ -38,14 +37,27 @@ var FrontEnd = {
     },
 
     contactUs: function() {
-        if(jQuery('#inputMessage').val().length <= 5) {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            window.location.href = '/~group4/contact-us-thanks.php';
-        }
+
+        var data = {
+            name: jQuery('#inputName').val(),
+            email: jQuery('#inputEmail').val(),
+            message: jQuery('#inputMessage').val()
+        };
+
+        jQuery.post(
+            "/~group4/ajax/contact-us.php",
+            data,
+            function(response) {
+                if(response.success) {
+                    // message successfully sent
+                    window.location.href = '/~group4/contact-us-thanks.php';
+                } else {
+                    // log in failed
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+            }, "json");
     }
 };
 

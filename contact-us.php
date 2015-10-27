@@ -11,11 +11,11 @@
 		</div>
 
 		<label for="inputName" class="sr-only">Name</label>
-		<input type="text" id="inputName" class="form-control" placeholder="Name" required autofocus>
+		<input type="text" id="inputName" name="name" class="form-control" placeholder="Name" required autofocus>
 		<label for="inputEmail" class="sr-only">Email address</label>
-		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+		<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
 		<label for="inputMessage" class="sr-only">Message</label>
-		<textarea id="inputMessage" class="form-control" placeholder="Your Message" required></textarea>
+		<textarea id="inputMessage" class="form-control" name="message" placeholder="Your Message" required></textarea>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 </div> <!-- inner -->

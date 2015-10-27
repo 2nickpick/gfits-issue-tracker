@@ -12,7 +12,7 @@ class User {
 	protected $last_password_change;
 
 	/**
-	 * @param $username - email address to login with
+	 * @param $email - email address to login with
 	 * @param $password - plaintext password
 	 *
 	 * @return User
@@ -25,6 +25,24 @@ class User {
 		);
 
 		return self::loadAll( 'tUser.EmailAddress = :email AND tLogin.Passwd = :password', $data, false );
+	}
+
+	public static function contactUs( $name, $email, $message ) {
+
+		$recipients = array(
+			'n00623697@ospreys.unf.edu'
+		);
+
+		$body = '';
+		$body .= 'Name: ' . htmlentities($name) . "\r\n";
+		$body .= 'Email: ' . htmlentities($email) . "\r\n";
+		$body .= 'Message: ' . htmlentities($message) . "\r\n";
+
+		if(mail(implode($recipients), 'GFITS Contact Us', $body, 'From: website@gfits.com'."\r\n")) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
