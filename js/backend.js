@@ -1,6 +1,8 @@
 var BackEnd = {
     init: function() {
         Util.setActiveMenuItem();
+
+        Util.initPictureUploads({users_id: jQuery('#hiddenUsersId').val()});
     },
 
     myAccount: function() {
@@ -162,6 +164,37 @@ var BackEnd = {
                     Util.animate('#errors-container', 'shake');
                 }
             }, "json");
+    },
+
+    deleteUser: function() {
+        if(confirm('Are you sure you want to delete this user?')) {
+
+            jQuery('#success-container').hide();
+            jQuery('#errors-container').hide();
+
+            jQuery('html, body').animate({
+                scrollTop: 0
+            }, 250);
+
+            var data = {
+                users_id: jQuery('#hiddenUsersId').val()
+            };
+
+            jQuery.post(
+                "/~group4/secure/ajax/delete-user.php",
+                data,
+                function(response) {
+                    if(response.success) {
+                        // updated user successfully
+                        window.location.href = '/~group4/secure/users.php';
+                    } else {
+                        // update user failed
+                        jQuery('#errors-container .alert').html(response.error);
+                        jQuery('#errors-container').show();
+                        Util.animate('#errors-container', 'shake');
+                    }
+                }, "json");
+        }
     },
 
     sortUsers: function(order_by) {

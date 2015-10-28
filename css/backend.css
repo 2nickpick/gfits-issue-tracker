@@ -78,3 +78,7 @@ body {
 .row.search-tickets {
     margin-bottom: 30px;
 }
+
+.picture-element-principal{
+    background-size: contain !important;
+}

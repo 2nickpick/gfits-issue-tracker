@@ -17,6 +17,7 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="/~group4/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
 	<!-- Project-specific CSS -->
 	<link href="/~group4/vendor/animate.css" rel="stylesheet">

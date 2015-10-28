@@ -82,6 +82,7 @@ class User {
                 EmailAddress,
                 PhoneNumber,
                 CellPhoneCarrierID,
+                ProfilePicture,
 
                 tLogin.TypeID,
                 tLogin.LastPasswordChange
@@ -105,6 +106,7 @@ class User {
 						'email_address'         => $row['EmailAddress'],
 						'phone_number'          => $row['PhoneNumber'],
 						'cell_phone_carrier_id' => $row['CellPhoneCarrierID'],
+						'profile_picture'       => $row['ProfilePicture'],
 						'type_id'               => $row['TypeID'],
 						'last_password_change'  => $row['LastPasswordChange']
 					)
@@ -325,7 +327,8 @@ class User {
 				LastName = :last_name,
 				EmailAddress = :email_address,
 				PhoneNumber = :phone_number,
-				CellPhoneCarrierID = :cell_phone_carrier_id
+				CellPhoneCarrierID = :cell_phone_carrier_id,
+				ProfilePicture = :profile_picture
 			WHERE
 				UserId = :users_id
 			';
@@ -336,7 +339,8 @@ class User {
 			':last_name'             => $this->last_name,
 			':email_address'         => $this->email_address,
 			':phone_number'          => $this->phone_number,
-			':cell_phone_carrier_id' => $this->cell_phone_carrier_id
+			':cell_phone_carrier_id' => $this->cell_phone_carrier_id,
+			':profile_picture'       => $this->profile_picture
 		);
 
 		$statement = $con->prepare( $sql );
@@ -345,24 +349,20 @@ class User {
 			$this->id = $con->lastInsertId();
 
 			$data = array(
-				':user_id'  => $this->id,
-				':type_id'  => $this->type_id
+				':user_id' => $this->id,
+				':type_id' => $this->type_id
 			);
 
-			if(!empty($this->type_id)) {
-				$type_sql = 'TypeId = :type_id';
-				$data[':type_id'] = $this->type_id;
-			}
-
-			if(!empty($this->password)) {
-				$password_sql = ',
+			$password_sql = '';
+			if ( ! empty( $this->password ) ) {
+				$password_sql      = ',
 				Passwd = :password,
 				LastPasswordChange = CURRENT_TIMESTAMP';
 				$data[':password'] = $this->password;
 			}
 
-			if(!empty($password_sql) || !empty($type_sql)) {
-				$sql      = '
+			if ( ! empty( $password_sql ) || ! empty( $type_sql ) ) {
+				$sql = '
 					UPDATE tLogin
 					SET
 					TypeId = :type_id
