@@ -21,14 +21,6 @@
       enctype="multipart/form-data">
 
 	<div class="row">
-		<label for="inputProfilePicture">Profile Picture</label>
-
-		<div class="col-sm-6">
-			<img class="profile-picture" src="/~group4/images/shelgon.png"/>
-		</div>
-		<div class="col-sm-6">
-			<input type="file" class="form-control" id="inputProfilePicture" name="profile-picture"/>
-		</div>
 		<div class="col-sm-6">
 			<label for="inputFirstName">First Name</label>
 			<input type="text" id="inputFirstName" name="first_name" class="form-control"

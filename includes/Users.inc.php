@@ -11,6 +11,9 @@ class User {
 	protected $type_id;
 	protected $last_password_change;
 
+	protected $password;
+	protected $password_again;
+
 	/**
 	 * @param $email - email address to login with
 	 * @param $password - plaintext password
@@ -34,11 +37,11 @@ class User {
 		);
 
 		$body = '';
-		$body .= 'Name: ' . htmlentities($name) . "\r\n";
-		$body .= 'Email: ' . htmlentities($email) . "\r\n";
-		$body .= 'Message: ' . htmlentities($message) . "\r\n";
+		$body .= 'Name: ' . htmlentities( $name ) . "\r\n";
+		$body .= 'Email: ' . htmlentities( $email ) . "\r\n";
+		$body .= 'Message: ' . htmlentities( $message ) . "\r\n";
 
-		if(mail(implode($recipients), 'GFITS Contact Us', $body, 'From: website@gfits.com'."\r\n")) {
+		if ( mail( implode( $recipients ), 'GFITS Contact Us', $body, 'From: website@gfits.com' . "\r\n" ) ) {
 			return true;
 		}
 
@@ -245,6 +248,69 @@ class User {
 		$this->last_password_change = $last_password_change;
 	}
 
+	public function add() {
+		global $con;
+
+		$sql = '
+			INSERT INTO tUser
+			(
+                FirstName,
+                LastName,
+                EmailAddress,
+                PhoneNumber,
+                CellPhoneCarrierID
+			)
+			VALUES
+			(
+				:first_name,
+				:last_name,
+				:email_address,
+				:phone_number,
+				:cell_phone_carrier_id
+			)';
+
+		$data = array(
+			':first_name'            => $this->first_name,
+			':last_name'             => $this->last_name,
+			':email_address'         => $this->email_address,
+			':phone_number'          => $this->phone_number,
+			':cell_phone_carrier_id' => $this->cell_phone_carrier_id
+		);
+
+		$statement = $con->prepare( $sql );
+		if( $statement->execute( $data ) ) {
+
+			$this->id = $con->lastInsertId();
+			$sql = '
+				INSERT INTO tLogin
+				(
+	                UserID,
+	                TypeID,
+	                Passwd,
+	                LastPasswordChange
+				)
+				VALUES
+				(
+					:user_id,
+					:type_id,
+					:password,
+					NULL
+				)';
+
+			$data = array(
+				':user_id' => $this->id,
+				':type_id' => $this->type_id,
+				':password' => $this->password,
+			);
+
+			$statement2 = $con->prepare( $sql );
+			$statement2->execute( $data );
+
+			return true;
+		}
+
+		return false;
+	}
 }
 
 class Type {

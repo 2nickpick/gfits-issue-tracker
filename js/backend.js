@@ -96,17 +96,32 @@ var BackEnd = {
             scrollTop: 0
         }, 250);
 
-        if(jQuery('#inputMessage').val().length <= 10) {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            var users_id = Math.floor((Math.random() * 100) + 1).toString();
-            window.location.href = '/~group4/secure/user.php?users_id=' + users_id;
-        }
-    },
+        var data = {
+            first_name: jQuery('#inputFirstName').val(),
+            last_name: jQuery('#inputLastName').val(),
+            email_address: jQuery('#inputEmailAddress').val(),
+            phone_number: jQuery('#inputPhoneNumber').val(),
+            type_id: jQuery('#selectLoginType').val(),
+            cell_phone_carrier_id: jQuery('#selectPhoneCarrier').val(),
+            password: jQuery('#inputPassword').val(),
+            password_again: jQuery('#inputPasswordAgain').val()
+        };
 
+        jQuery.post(
+            "/~group4/secure/ajax/add-user.php",
+            data,
+            function(response) {
+                if(response.success) {
+                    // added user successfully
+                    window.location.href = '/~group4/secure/user.php?users_id=' + response.users_id;
+                } else {
+                    // add user failed
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+            }, "json");
+    },
 
     openUser: function(users_id) {
         window.location.href = '/~group4/secure/user.php?users_id='+users_id;
