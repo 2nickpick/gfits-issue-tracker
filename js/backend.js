@@ -132,15 +132,36 @@ var BackEnd = {
         jQuery('#success-container').hide();
         jQuery('#errors-container').hide();
 
-        if(jQuery('#inputMessage').val().length <= 10) {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            var ticket_id = Math.floor((Math.random() * 100) + 1).toString();
-            window.location.href = '/~group4/secure/ticket.php?tickets_id=' + ticket_id;
-        }
+        jQuery('html, body').animate({
+            scrollTop: 0
+        }, 250);
+
+        var data = {
+            users_id: jQuery('#hiddenUsersId').val(),
+            first_name: jQuery('#inputFirstName').val(),
+            last_name: jQuery('#inputLastName').val(),
+            email_address: jQuery('#inputEmailAddress').val(),
+            phone_number: jQuery('#inputPhoneNumber').val(),
+            type_id: jQuery('#selectLoginType').val(),
+            cell_phone_carrier_id: jQuery('#selectPhoneCarrier').val(),
+            password: jQuery('#inputPassword').val(),
+            password_again: jQuery('#inputPasswordAgain').val()
+        };
+
+        jQuery.post(
+            "/~group4/secure/ajax/edit-user.php",
+            data,
+            function(response) {
+                if(response.success) {
+                    // updated user successfully
+                    window.location.href = '/~group4/secure/users.php';
+                } else {
+                    // update user failed
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+            }, "json");
     },
 
     sortUsers: function(order_by) {

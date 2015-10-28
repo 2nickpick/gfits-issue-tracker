@@ -16,16 +16,38 @@ if ( empty( $_GET['users_id'] ) ) {
 		<h1>
 			Edit User: <?php echo $user->getFirstName() . ' ' . $user->getLastName() ?>
 		</h1>
+		<input class="form-control btn btn-danger" type="submit" value="Delete User"/>
+	</div>
+
+	<div id="errors-container">
+		<div class="alert alert-warning">
+			<strong>Required Field Missing!</strong> Your message is too short! Make it longer to show success!
+		</div>
+	</div>
+
+	<div id="success-container">
+		<div class="alert alert-success">
+			<strong>Success!</strong> We have received your ticket and a support specialist will respond shortly!
+		</div>
 	</div>
 
 	<form id="add-ticket-form" class="form" onsubmit="BackEnd.updateUser(); return false;"
 	      enctype="multipart/form-data">
 
+		<input type="hidden" id="hiddenUsersId" name="users_id" value="<?php echo $user->getId() ?>" />
+
 		<div class="row">
 			<label for="inputProfilePicture">Profile Picture</label>
 
 			<div class="col-sm-6">
-				<img class="profile-picture" src="/~group4/images/shelgon.png"/>
+				<?php
+				if(!empty($user->getProfilePicture())) {
+					$profile_src = $user->getProfilePicture();
+				} else {
+					$profile_src = '/~group4/images/default.png';
+				}
+				?>
+				<img class="profile-picture" src="<?php echo $profile_src ?>"/>
 			</div>
 			<div class="col-sm-6">
 				<input type="file" class="form-control" id="inputProfilePicture" name="profile-picture"/>
@@ -115,10 +137,7 @@ if ( empty( $_GET['users_id'] ) ) {
 				<input class="form-control" type="password" name="password_again" value="" id="inputPasswordAgain"/>
 			</div>
 
-			<div class="col-sm-6">
-				<input class="form-control btn btn-danger" type="submit" value="Delete User"/>
-			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-12">
 				<input class="form-control btn btn-primary" type="submit" value="Save User"/>
 			</div>
 		</div>

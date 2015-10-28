@@ -8,6 +8,8 @@ class User {
 	protected $phone_number;
 	protected $cell_phone_carrier_id;
 
+	protected $profile_picture;
+
 	protected $type_id;
 	protected $last_password_change;
 
@@ -278,10 +280,10 @@ class User {
 		);
 
 		$statement = $con->prepare( $sql );
-		if( $statement->execute( $data ) ) {
+		if ( $statement->execute( $data ) ) {
 
 			$this->id = $con->lastInsertId();
-			$sql = '
+			$sql      = '
 				INSERT INTO tLogin
 				(
 	                UserID,
@@ -298,8 +300,8 @@ class User {
 				)';
 
 			$data = array(
-				':user_id' => $this->id,
-				':type_id' => $this->type_id,
+				':user_id'  => $this->id,
+				':type_id'  => $this->type_id,
 				':password' => $this->password,
 			);
 
@@ -310,6 +312,93 @@ class User {
 		}
 
 		return false;
+	}
+
+	public function update() {
+		global $con;
+
+		$sql = '
+			UPDATE
+				tUser
+			SET
+				FirstName = :first_name,
+				LastName = :last_name,
+				EmailAddress = :email_address,
+				PhoneNumber = :phone_number,
+				CellPhoneCarrierID = :cell_phone_carrier_id
+			WHERE
+				UserId = :users_id
+			';
+
+		$data = array(
+			':users_id'              => $this->id,
+			':first_name'            => $this->first_name,
+			':last_name'             => $this->last_name,
+			':email_address'         => $this->email_address,
+			':phone_number'          => $this->phone_number,
+			':cell_phone_carrier_id' => $this->cell_phone_carrier_id
+		);
+
+		$statement = $con->prepare( $sql );
+		if ( $statement->execute( $data ) ) {
+
+			$this->id = $con->lastInsertId();
+
+			$data = array(
+				':user_id'  => $this->id,
+				':type_id'  => $this->type_id
+			);
+
+			if(!empty($this->type_id)) {
+				$type_sql = 'TypeId = :type_id';
+				$data[':type_id'] = $this->type_id;
+			}
+
+			if(!empty($this->password)) {
+				$password_sql = ',
+				Passwd = :password,
+				LastPasswordChange = CURRENT_TIMESTAMP';
+				$data[':password'] = $this->password;
+			}
+
+			if(!empty($password_sql) || !empty($type_sql)) {
+				$sql      = '
+					UPDATE tLogin
+					SET
+					TypeId = :type_id
+					' . $password_sql . '
+					WHERE
+						UserID = :user_id';
+
+				$statement2 = $con->prepare( $sql );
+				$statement2->execute( $data );
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param mixed $password
+	 */
+	public function setPassword( $password ) {
+		$this->password = $password;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getProfilePicture() {
+		return $this->profile_picture;
+	}
+
+	/**
+	 * @param mixed $profile_picture
+	 */
+	public function setProfilePicture( $profile_picture ) {
+		$this->profile_picture = $profile_picture;
 	}
 }
 

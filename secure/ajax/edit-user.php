@@ -26,9 +26,7 @@ if(empty($_POST['email_address'])) {
 	$errors[] = 'Email Address is required';
 }
 
-if(empty($_POST['password'])) {
-	$errors[] = 'New Password is required';
-} else {
+if(!empty($_POST['password'])) {
 	if(strlen($_POST['password']) < 8) {
 		$errors[] = 'Your password must be at least 8 characters long.';
 	}
@@ -38,24 +36,31 @@ if(empty($_POST['password'])) {
 	}
 }
 
-if(empty($errors)) {
-	$user = new User(
-		array(
-			'first_name' => $_POST['first_name'],
-			'last_name' => $_POST['last_name'],
-			'email_address' => $_POST['email_address'],
-			'phone_number' => $_POST['phone_number'],
-			'cell_phone_carrier_id' => $_POST['cell_phone_carrier_id'],
-			'type_id' => $_POST['type_id'],
-			'password' => $_POST['password']
-		)
-	);
+$user = null;
+if(empty($_POST['users_id'])) {
+	$errors[] = 'User ID was not provided.';
+} else {
+	$user = User::loadById($_POST['users_id']);
+	if(empty($user)) {
+		$errors[] = 'User could not be found. May have been deleted.';
+	}
+}
 
-	if($user->add()) {
+if(empty($errors)) {
+	$user->setFirstName($_POST['first_name']);
+	$user->setLastName($_POST['last_name']);
+	$user->setEmailAddress($_POST['email_address']);
+	$user->setPhoneNumber($_POST['phone_number']);
+	$user->setCellPhoneCarrierId($_POST['cell_phone_carrier_id']);
+	$user->setPassword($_POST['password']);
+	$user->setTypeId($_POST['type_id']);
+
+	if($user->update()) {
+
 		$response['success'] = true;
 		$response['users_id'] = $user->getId();
 	} else {
-		$response['error'] = "Adding the new user failed.";
+		$response['error'] = "Updating the user failed.";
 	}
 } else {
 	$response['error'] = implode("<br />", $errors);
