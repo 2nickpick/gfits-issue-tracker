@@ -62,6 +62,26 @@ class User {
 	}
 
 	/**
+	 * @param $search
+	 *
+	 * @return User
+	 */
+	public static function loadBySearch( $search ) {
+		$data = array(
+			':first_name' => '%' . $search . '%',
+			':last_name' => '%' . $search . '%',
+			':email' => '%' . $search . '%'
+		);
+
+		$where =
+			'tUser.FirstName LIKE :first_name
+			OR tUser.LastName LIKE :last_name
+            OR tUser.EmailAddress LIKE :email';
+
+		return self::loadAll($where, $data, true);
+	}
+
+	/**
 	 * @param string $where - WHERE of the sql query
 	 * @param array $data - sql values to bind to the prepared query
 	 *

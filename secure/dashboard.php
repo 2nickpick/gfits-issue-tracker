@@ -22,7 +22,7 @@ $ticket_count = rand( 3, 8 );
 	<!-- /.col-lg-6 -->
 	<div class="col-lg-6">
 		<div class="input-group">
-			<input id="search" type="text" class="form-control" placeholder="Search for...">
+			<input id="search-tickets" name="tickets" type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" onclick="BackEnd.searchTickets(jQuery('#search').val());">Go!
         </button>

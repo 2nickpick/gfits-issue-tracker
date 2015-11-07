@@ -3,6 +3,14 @@ var BackEnd = {
         Util.setActiveMenuItem();
 
         Util.initPictureUploads({users_id: jQuery('#hiddenUsersId').val()});
+
+        jQuery('#search-users').on('change keyup', function(e) {
+            BackEnd.searchUsers(this.value);
+        });
+
+        jQuery('#search-tickets').on('change keyup', function(e) {
+            BackEnd.searchTickets(this.value);
+        });
     },
 
     myAccount: function() {
@@ -204,8 +212,50 @@ var BackEnd = {
 
 
     searchUsers: function(search_term) {
-        // ajax load in the list by key term
-        console.log('Searching users by ' + search_term + '...');
+        jQuery('#throbber').show();
+        jQuery.post(
+            "/~group4/secure/ajax/search-user.php",
+            {
+                'search': search_term,
+                'verb': 'search'
+            },
+            function(users) {
+                jQuery('#user_count').text(users.length);
+
+                var tbody = jQuery('.users tbody');
+                tbody.empty();
+
+                var email_address = '';
+                var phone_number = '';
+                jQuery.each(users, function(i, user) {
+
+                    email_address = '';
+                    if(user.email_address != null) {
+                        email_address = '<a href="' + user.email_address + '">' + user.email_address + '</a>';
+                    }
+
+                    phone_number = '';
+                    if(user.phone_number != null) {
+                        phone_number = user.phone_number;
+                    }
+
+                    jQuery('<tr>')
+                        .on('click', function() {
+                            BackEnd.openUser(user.id);
+                        })
+                        .append(
+                            jQuery('<td>').text(user.id),
+                            jQuery('<td>').text(user.first_name + ' ' + user.last_name),
+                            jQuery('<td>').text(user.role),
+                            jQuery('<td>').html(email_address),
+                            jQuery('<td>').text(phone_number)
+                        ).appendTo(tbody);
+                });
+
+                jQuery('#throbber').hide();
+            },
+            'json'
+        );
     }
 };
 

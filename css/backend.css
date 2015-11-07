@@ -75,10 +75,19 @@ body {
     cursor: pointer;
 }
 
-.row.search-tickets {
+.row.search-tickets,
+.row.search-users {
     margin-bottom: 30px;
 }
 
 .picture-element-principal{
     background-size: contain !important;
+}
+
+#throbber {
+    display: none;
+    background: url('/~group4/images/throbber.gif') no-repeat right;
+    background-size: contain;
+    height: 30px;
+    content: ' ';
 }
