@@ -66,6 +66,7 @@ class Ticket {
 			'SELECT
                 tTicket.TicketID AS ticket_id,
                 tTicket.IssueTitle as ticket_issue_title,
+                tTicket.Description as ticket_description,
                 UNIX_TIMESTAMP(tTicket.DateOpened) AS ticket_date_opened,
 
                 tTicket.CategoryID AS category_id,
@@ -115,9 +116,12 @@ class Ticket {
 							'last_password_change'  => $row['opened_by_last_password_change']
 						),
 						'issue_title' => $row['ticket_issue_title'],
+						'description' => $row['ticket_description'],
 						'date_opened' => $row['ticket_date_opened'],
 					)
 				);
+
+				$ticket->loadNotes();
 
 				if ( ! $return_array ) {
 					return $ticket;
@@ -142,8 +146,6 @@ class Ticket {
 			if ( ! empty( $properties['opened_by'] ) ) {
 				$this->opened_by = new User( $properties['opened_by'] );
 			}
-
-			$this->notes = TicketNote::loadByTicket($this->id);
 		}
 	}
 
@@ -344,6 +346,13 @@ class Ticket {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 *
+	 */
+	public function loadNotes() {
+		$this->notes = TicketNote::loadByTicket($this->id);
 	}
 }
 
@@ -675,11 +684,17 @@ class TicketNote
 			'SELECT
                 tTicketNote.TicketNoteID AS ticket_note_id,
                 tTicketNote.TicketID as ticket_id,
+
                 tTicketNote.UserID as user_id,
+                jUser.FirstName as user_first_name,
+                jUser.LastName as user_last_name,
+                jUser.ProfilePicture as user_profile_picture,
+
                 tTicketNote.StatusID as status_id,
                 UNIX_TIMESTAMP(tTicketNote.NoteDate) AS note_date,
                 tTicketNote.NoteText AS note_text
             FROM tTicketNote
+            LEFT JOIN tUser jUser ON jUser.UserID = tTicketNote.UserID
             ' . $where . '
             ' . $order_by . '';
 
@@ -698,7 +713,10 @@ class TicketNote
 							'id' => $row['ticket_id']
 						),
 						'user'     => array(
-							'id' => $row['user_id']
+							'id' => $row['user_id'],
+							'first_name' => $row['user_first_name'],
+							'last_name' => $row['user_last_name'],
+							'profile_picture' => $row['user_profile_picture']
 						),
 						'status'   => array(
 							'id' => $row['status_id']
@@ -730,13 +748,13 @@ class TicketNote
 				$this->status = new Status($properties['status']);
 			}
 
-//			if(!empty($properties['user'])) {
-//				$this->status = new User($properties['user']);
-//			}
-//
-//			if(!empty($properties['ticket'])) {
-//				$this->ticket = new Ticket($properties['ticket']);
-//			}
+			if(!empty($properties['user'])) {
+				$this->user = new User($properties['user']);
+			}
+
+			if(!empty($properties['ticket'])) {
+				$this->ticket = new Ticket($properties['ticket']);
+			}
 		}
 	}
 }

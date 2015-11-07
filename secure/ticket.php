@@ -1,8 +1,14 @@
 <?php include( 'head.php' ); ?>
+<?php
+global $currentUser;
+$ticket = null;
+if ( ! empty( $_GET['tickets_id'] ) ) {
+	$ticket = Ticket::loadById( $_GET['tickets_id'] );
+}
+?>
 
 <?php
-
-if ( empty( $_GET['tickets_id'] ) ) {
+if ( empty( $ticket ) ) {
 	?>
 	<div class="alert alert-danger">
 		Ticket was not found! <a href="/~group4/secure/dashboard.php">Back to Dashboard</a>
@@ -12,14 +18,12 @@ if ( empty( $_GET['tickets_id'] ) ) {
 	?>
 	<div class="page-header">
 		<h1>
-			My Ticket: ID <?php echo $_GET['tickets_id'] ?>
+			<?php echo htmlentities( $ticket->getIssueTitle() ); ?>
 		</h1>
 		<?php
-		$closed = rand( 1, 2 ) % 2 == 0;
-		if ( ! $closed ) {
+		if ( $ticket->isOpen() ) {
 			?>
 			<span class="label label-warning">Open</span>
-			<span class="label label-danger">More Than 1 Week Old</span>
 			<?php
 		} else {
 			?>
@@ -32,40 +36,53 @@ if ( empty( $_GET['tickets_id'] ) ) {
 	<div class="row">
 		<div class="well clearfix">
 			<div class="col-sm-2 text-center">
-				<img class="profile-picture" src="/~group4/images/shelgon.png"/>
 
-				<p><strong>Tester</strong></p>
+				<img class="profile-picture" src="<?php
+					if(!empty($ticket->getOpenedBy()->getProfilePicture())) {
+						echo '/~group4/images/uploads/'.$ticket->getOpenedBy()->getProfilePicture();
+					} else {
+						echo '/~group4/images/default.png';
+					}
+				?>" />
 
-				<p><strong><?php echo date( 'M d, Y h:i A', strtotime( '-2 day' ) ) ?></strong></p>
+				<p><strong><?php echo htmlentities( $ticket->getOpenedBy()->getFirstName() . ' '
+				                                    . $ticket->getOpenedBy()->getLastName() ) ?></strong></p>
+
+				<p><strong><?php echo date( 'M d, Y h:i A', $ticket->getDateOpened() ) ?></strong></p>
 			</div>
 			<div class="col-sm-10">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla blandit elit libero, ac suscipit est pretium at.
-				Donec placerat, dolor sit amet accumsan auctor, arcu augue imperdiet neque, in iaculis lacus dui et dui. Nullam
-				eu purus at nulla laoreet varius. Nullam in dui venenatis, porttitor libero a, tempus tellus. Donec sed ex non
-				sodales magna eu, congue tortor. Sed ac magna id nulla elementum rutrum. Vestibulum bibendum odio enim, et
-				feugiat nunc varius sit amet. Sed ut eros id felis cursus egestas. Duis suscipit venenatis ex in dictum. Nunc
-				sagittis ante turpis. Fusce vel eros lectus.
+				<?php echo htmlentities($ticket->getDescription(), ENT_QUOTES, 'UTF-8') ?>
 			</div>
 		</div>
 	</div>
 
 	<?php
-	$replies = array( 1 );
-	foreach ( $replies as $reply ) {
+	$notes = $ticket->getNotes();
+	foreach ( $notes as $note ) {
 		?>
 		<div class="row">
 			<div class="well clearfix">
 				<div class="col-sm-2 text-center">
-					<img class="profile-picture" src="/~group4/images/psyduck.jpg"/>
+					<img class="profile-picture" src="<?php
+						if(!empty($note->getUser()->getProfilePicture())) {
+							echo '/~group4/images/uploads/'.$note->getUser()->getProfilePicture();
+						} else {
+							echo '/~group4/images/default.png';
+						}
+					?>" />
 
-					<p><strong>Staff Member</strong></p>
+					<p>
+						<strong>
+							<?php echo htmlentities($note->getUser()->getFirstName() . ' ' . $note->getUser()->getLastName()) ?>
+						</strong>
+					</p>
 
 					<p><span class="label label-default">Trusted Staff Member</span></p>
 
-					<p><strong><?php echo date( 'M d, Y h:i A', strtotime( '-1 day + 3 hours + 12 minutes' ) ) ?></strong></p>
+					<p><strong><?php echo date( 'M d, Y h:i A', $note->getDate()) ?></strong></p>
 				</div>
 				<div class="col-sm-10">
-					Well, it seems you have a fair bit of knowledge about lorem ipsum generation.
+					<?php echo htmlentities($note->getNoteText()) ?>
 				</div>
 			</div>
 		</div>
@@ -94,11 +111,19 @@ if ( empty( $_GET['tickets_id'] ) ) {
 
 		<div class="row">
 			<div class="col-sm-2">
-				<img class="profile-picture" src="/~group4/images/shelgon.png"/>
+				<img class="profile-picture" src="<?php
+				if(!empty($currentUser->getProfilePicture())) {
+					echo '/~group4/images/uploads/'.$currentUser->getProfilePicture();
+				} else {
+					echo '/~group4/images/default.png';
+				}
+				?>" />
 			</div>
 			<div class="col-sm-6">
 				<label for="inputName">Name</label>
-				<input type="text" id="inputName" class="form-control" value="Tester" disabled required autofocus>
+				<input type="text" id="inputName" class="form-control"
+				       value="<?php echo htmlentities($currentUser->getFirstName() . ' ' . $currentUser->getLastName()) ?>"
+				       disabled required autofocus>
 			</div>
 			<div class="col-sm-4">
 				<label for="inputDate">Date</label>
@@ -111,12 +136,12 @@ if ( empty( $_GET['tickets_id'] ) ) {
 		<textarea id="inputMessage" class="form-control" required></textarea>
 
 		<label for="inputAttachment">Attachment (optional):</label>
-		<input id="inputAttachment" type="file" name="attachment" class="form-control" />
+		<input id="inputAttachment" type="file" name="attachment" class="form-control"/>
 
 		<div class="row">
 			<div class="col-sm-6">
 				<?php
-				if(! $closed ) {
+				if ( $ticket->isOpen() ) {
 					?>
 					<button class="btn btn-lg btn-success btn-block" type="submit">Add Note and Close Ticket</button>
 					<?php
