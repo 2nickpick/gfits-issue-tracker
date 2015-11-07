@@ -88,7 +88,6 @@ var BackEnd = {
     },
 
     searchTickets: function (search_term, order_by) {
-        console.log(search_term);
 
         if (!order_by) {
             order_by = '';
