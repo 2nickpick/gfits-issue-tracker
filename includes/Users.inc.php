@@ -380,6 +380,38 @@ class User {
 		return false;
 	}
 
+	public function delete() {
+		global $con;
+
+		$sql = '
+			DELETE FROM
+				tLogin
+			WHERE
+				UserId = :users_id
+			';
+
+		$data = array(
+			':users_id'              => $this->id
+		);
+
+		$statement = $con->prepare( $sql );
+		if ( $statement->execute( $data ) ) {
+
+			$sql = '
+				DELETE FROM
+					tUser
+				WHERE
+					UserID = :users_id';
+
+			$statement2 = $con->prepare( $sql );
+			$statement2->execute( $data );
+
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * @param mixed $password
 	 */
