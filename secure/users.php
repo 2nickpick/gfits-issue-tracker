@@ -33,23 +33,23 @@ $users = User::loadAll();
 		<tr>
 			<th class="hidden-xs hidden-sm">
 				<a href="javascript:;"
-				   onclick="BackEnd.sortUsers('id')">ID #</a>
+				   onclick="BackEnd.sortUsers('tUser.UserID')">ID #</a>
 			</th>
 			<th>
 				<a href="javascript:;"
-				   onclick="BackEnd.sortUsers('name')">Name</a>
+				   onclick="BackEnd.sortUsers('tUser.FirstName, tUser.LastName')">Name</a>
 			</th>
 			<th>
 				<a href="javascript:;"
-				   onclick="BackEnd.sortUsers('role')">Role</a>
+				   onclick="BackEnd.sortUsers('tLogin.TypeID')">Role</a>
 			</th>
 			<th class="hidden-xs hidden-sm">
 				<a href="javascript:;"
-				   onclick="BackEnd.sortUsers('email_address')">Email</a>
+				   onclick="BackEnd.sortUsers('tUser.EmailAddress')">Email</a>
 			</th>
 			<th class="hidden-xs hidden-sm hidden-md">
 				<a href="javascript:;"
-				   onclick="BackEnd.sortUsers('phone_number')">Phone</a>
+				   onclick="BackEnd.sortUsers('tUser.PhoneNumber')">Phone</a>
 			</th>
 		</tr>
 		</thead>

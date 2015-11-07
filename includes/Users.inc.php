@@ -66,7 +66,7 @@ class User {
 	 *
 	 * @return User
 	 */
-	public static function loadBySearch( $search ) {
+	public static function loadBySearch( $search, $order_by ) {
 		$data = array(
 			':first_name' => '%' . $search . '%',
 			':last_name' => '%' . $search . '%',
@@ -78,7 +78,7 @@ class User {
 			OR tUser.LastName LIKE :last_name
             OR tUser.EmailAddress LIKE :email';
 
-		return self::loadAll($where, $data, true);
+		return self::loadAll($where, $data, true, $order_by);
 	}
 
 	/**
@@ -87,11 +87,15 @@ class User {
 	 *
 	 * @return array
 	 */
-	public static function loadAll( $where = '', $data = array(), $return_array = true ) {
+	public static function loadAll( $where = '', $data = array(), $return_array = true, $order_by = '' ) {
 		global $con;
 
 		if ( ! empty( $where ) ) {
 			$where = ' WHERE ' . $where;
+		}
+
+		if ( ! empty( $order_by ) ) {
+			$order_by = ' ORDER BY ' . $order_by;
 		}
 
 		$sql =
@@ -108,7 +112,8 @@ class User {
                 tLogin.LastPasswordChange
             FROM tUser
             LEFT JOIN tLogin ON tLogin.UserID = tUser.UserID
-            ' . $where . '';
+            ' . $where . '
+            ' . $order_by . '';
 
 		$statement = $con->prepare( $sql );
 		$statement->execute( $data );

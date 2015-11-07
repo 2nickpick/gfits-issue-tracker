@@ -206,17 +206,21 @@ var BackEnd = {
     },
 
     sortUsers: function(order_by) {
-        // ajax load in the list ordered appropriately
-        console.log('Sorting users by ' + order_by + '...');
+        BackEnd.searchUsers(jQuery('#user-search').val(), order_by);
     },
 
+    searchUsers: function(search_term, order_by) {
 
-    searchUsers: function(search_term) {
+        if(!order_by) {
+            order_by = '';
+        }
+
         jQuery('#throbber').show();
         jQuery.post(
             "/~group4/secure/ajax/search-user.php",
             {
                 'search': search_term,
+                'order_by': order_by,
                 'verb': 'search'
             },
             function(users) {

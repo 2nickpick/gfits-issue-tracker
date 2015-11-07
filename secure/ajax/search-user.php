@@ -8,9 +8,9 @@ $json   = array();
 
 $users = array();
 if ( empty( $_POST['search'] ) ) {
-	$users = User::loadAll();
+	$users = User::loadAll('', array(), true, @$_POST['order_by']);
 } else {
-	$users = User::loadBySearch( $_POST['search'] );
+	$users = User::loadBySearch( $_POST['search'], @$_POST['order_by'] );
 }
 
 foreach ( $users as $i => $user ) {
