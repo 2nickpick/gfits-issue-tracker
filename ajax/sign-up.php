@@ -100,7 +100,7 @@ if(empty($response['error'])) {
 			$msg_body .= "Name: " . htmlentities($_POST['first_name'] . ' ' .  $_POST['last_name']) . "\r\n";
 			$msg_body .= "Email: " . htmlentities($_POST['email_address']) . "\r\n";
 			$msg_body .= "Cell Phone: " . htmlentities($cell) . "\r\n";
-			$msg_body .= "Cell Phone Carrier:" . htmlentities($_POST['cell_carrier']) . "\r\n";
+			$msg_body .= "Cell Phone Carrier:" . htmlentities($cell_phone_carrier->getName()) . "\r\n";
 
 			$msg_body .= "\r\nPlease remember to vote for us!\r\n";
 
