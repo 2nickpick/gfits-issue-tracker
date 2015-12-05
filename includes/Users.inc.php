@@ -583,7 +583,7 @@ class CellPhoneCarrier {
 	/**
 	 * @param $carriers_id
 	 *
-	 * @return Type
+	 * @return CellPhoneCarrier
 	 */
 	public static function loadById( $carriers_id ) {
 		$data = array( ':carriers_id' => $carriers_id );

@@ -26,14 +26,32 @@ var FrontEnd = {
     },
 
     signUp: function() {
-        if(jQuery('#inputPassword').val() != 'test1234') {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            window.location.href = '/~group4/sign-up-thanks.php';
-        }
+
+        var data = {
+            first_name: jQuery('#inputFName').val(),
+            last_name: jQuery('#inputLName').val(),
+            email_address: jQuery('#inputEmail').val(),
+            cell: jQuery('#inputCell').val(),
+            cell_carrier: jQuery('#inputCellCarrier').val(),
+            password: jQuery('#inputPassword').val(),
+            password_confirm: jQuery('#inputPasswordConfirm').val()
+        };
+
+        jQuery.post(
+            "/~group4/ajax/sign-up.php",
+            data,
+            function(response) {
+                if(response.success) {
+                    // message successfully sent
+                    window.location.href = '/~group4/sign-up-thanks.php';
+                } else {
+                    // log in failed
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+            }, "json");
+
     },
 
     contactUs: function() {

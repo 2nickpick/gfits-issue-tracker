@@ -1,33 +1,13 @@
-<?php include( 'head.php' ); 
-      include( 'db.php' );
-
-// Connect to server and select database.
-mysql_connect("$host", "$u", "$p")or die("cannot connect");
-mysql_select_db("$db_name")or die("cannot select DB");
-
-// mysql
-$sql="select * from tCellPhoneCarrier";	   
-$result=mysql_query($sql);
-
-// close connection
-mysql_close();
-
-?>
+<?php include( 'head.php' ); ?>
 
 <div class="inner">
-	<form class="form" action="process_registration.php" method="post">
+	<form class="form" onsubmit="FrontEnd.signUp(); return false;" method="post">
 		<h2 class="form-heading">Sign Up</h2>
 
 		<div id="errors-container">
 			<div class="alert alert-warning">
-				<strong>Required Field Missing!</strong> You must make your password test1234!
+				<strong>Required Field Missing!</strong>
 			</div>
-			<?php
-				$error = $_GET['error'];
-			
-				if($error == 1)
-					echo "<br><b>Passwords do not match. Please re-enter.</b>";
-			?>			
 		</div>
 
 		<label for="inputFName" class="sr-only">First Name</label>
@@ -42,14 +22,13 @@ mysql_close();
 		<select name="inputCellCarrier" id="inputCellCarrier" class="form-control">
 			<option value=0 selected>Cell Phone Carrier</option>
 			<?php
-				while($row = mysql_fetch_row($result))
+				$cellPhoneCarriers = CellPhoneCarrier::loadAll();
+				foreach($cellPhoneCarriers as $cellPhoneCarrier)
 				{
-					$CellPhoneCarrierID = $row[0];
-					$CellPhoneCarrierName = $row[1];
-					echo "<option value=$CellPhoneCarrierID>$CellPhoneCarrierName</option>";
+					echo "<option value=" . $cellPhoneCarrier->getId() . ">" . $cellPhoneCarrier->getName() . "</option>";
 				}
 			?>			
-		<select>
+		</select>
 		<label for="inputPassword" class="sr-only">Password</label>
 		<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
 		<label for="inputPasswordConfirm" class="sr-only">Password</label>
