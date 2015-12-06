@@ -757,4 +757,45 @@ class TicketNote
 			}
 		}
 	}
+
+	public function add() {
+		global $con, $currentUser;
+
+		$sql = '
+			INSERT INTO tTicketNote
+			(
+                TicketID,
+                UserID,
+                StatusID,
+                NoteDate,
+                NoteText
+			)
+			VALUES
+			(
+				:ticket_id,
+				:user_id,
+				:status_id,
+				NOW(),
+				:note_text
+			)';
+
+		$data = array(
+			':ticket_id'    => $this->ticket->getId(),
+			':user_id' => $currentUser->getId(),
+			':status_id'  => $this->status->getId(),
+			':note_text'  => $this->note_text
+		);
+
+		$statement = $con->prepare( $sql );
+		if ( $statement->execute( $data ) ) {
+
+			$this->id = $con->lastInsertId();
+
+			return true;
+		}
+
+		return false;
+	}
+
+
 }

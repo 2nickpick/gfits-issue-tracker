@@ -92,8 +92,15 @@ if ( empty( $ticket ) ) {
 
 	<form id="update-ticket-form" class="form" onsubmit="BackEnd.updateTicket(); return false;"
 	      enctype="multipart/form-data">
+		<input type="hidden" name="tickets_id" id="inputTicketsId" value="<?php echo $ticket->getId() ?>" />
 
 		<hr/>
+
+		<div id="errors-container">
+			<div class="alert alert-warning">
+				<strong>Required Field Missing!</strong>
+			</div>
+		</div>
 
 		<h3>Add a Response</h3>
 

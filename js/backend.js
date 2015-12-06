@@ -22,14 +22,43 @@ var BackEnd = {
             scrollTop: 0
         }, 250);
 
-        if (jQuery('#inputName').val().length <= 4) {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            jQuery('#success-container').show();
-        }
+        var first_name = jQuery('#inputFName').val();
+        var last_name = jQuery('#inputLName').val();
+        var phone_number = jQuery('#inputCell').val();
+        var cell_phone_carrier_id = jQuery('#inputCellCarrier').val();
+        var email_address = jQuery('#inputEmail').val();
+        var password = jQuery('#inputPassword').val();
+        var password_again = jQuery('#inputPasswordConfirm').val();
+        var formData = new FormData(jQuery('form').get(0));
+
+        jQuery.ajax({
+            url: "/~group4/secure/ajax/my-account.php",
+            data: formData,
+            type: 'POST',
+            enctype: "multipart/form-data",
+            processData: false,
+            cache: false,
+            contentType: false,
+            xhr: function() {  // Custom XMLHttpRequest
+                var myXhr = jQuery.ajaxSettings.xhr();
+                if(myXhr.upload){ // Check if upload property exists
+                    myXhr.upload.addEventListener('progress', function() {return true;} , false); // For handling the progress of the upload
+                }
+                return myXhr;
+            },
+            success: function (response)
+            {
+                if(response.success) {
+                    jQuery('#success-container').show();
+                } else {
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+                jQuery('#throbber').hide();
+            }
+        }, 'json');
+
     },
 
     addTicket: function () {
@@ -41,15 +70,27 @@ var BackEnd = {
             scrollTop: 0
         }, 250);
 
-        if (jQuery('#inputMessage').val().length <= 10) {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            var ticket_id = Math.floor((Math.random() * 100) + 1).toString();
-            window.location.href = '/~group4/secure/ticket.php?tickets_id=' + ticket_id;
-        }
+        var title = jQuery('#inputTitle').val();
+        var message = jQuery('#inputMessage').val();
+
+        jQuery.post(
+            "/~group4/secure/ajax/add-ticket.php",
+            {
+                'title': title,
+                'message': message
+            },
+            function (response) {
+                if(response.success) {
+                    window.location.href = '/~group4/secure/ticket.php?tickets_id=' + response.tickets_id;
+                } else {
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+                jQuery('#throbber').hide();
+            },
+            'json'
+        );
     },
 
     updateTicket: function () {
@@ -57,15 +98,31 @@ var BackEnd = {
         jQuery('#success-container').hide();
         jQuery('#errors-container').hide();
 
-        if (jQuery('#inputMessage').val().length <= 10) {
-            // log in failed
-            jQuery('#errors-container').show();
-            Util.animate('#errors-container', 'shake');
-        } else {
-            // successfully logged in
-            var ticket_id = Math.floor((Math.random() * 100) + 1).toString();
-            window.location.href = '/~group4/secure/ticket.php?tickets_id=' + ticket_id;
-        }
+        jQuery('html, body').animate({
+            scrollTop: 0
+        }, 250);
+
+        var message = jQuery('#inputMessage').val();
+        var tickets_id = jQuery('#inputTicketsId').val();
+
+        jQuery.post(
+            "/~group4/secure/ajax/edit-ticket.php",
+            {
+                'tickets_id': tickets_id,
+                'message': message
+            },
+            function (response) {
+                if(response.success) {
+                    window.location.href = '/~group4/secure/ticket.php?tickets_id=' + response.tickets_id;
+                } else {
+                    jQuery('#errors-container .alert').html(response.error);
+                    jQuery('#errors-container').show();
+                    Util.animate('#errors-container', 'shake');
+                }
+                jQuery('#throbber').hide();
+            },
+            'json'
+        );
     },
 
     logOutWait: function (seconds) {

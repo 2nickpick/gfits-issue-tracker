@@ -18,7 +18,7 @@
 </div>
 
 <form id="add-user-form" class="form" onsubmit="BackEnd.addUser(); return false;"
-      enctype="multipart/form-data">
+	enctype="multipart/form-data">
 
 	<div class="row">
 		<div class="col-sm-6">
