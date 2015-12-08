@@ -1,7 +1,9 @@
-<?php include( 'head.php' ); ?>
-
+<?php
+include( 'head.php' );
+global $currentUser;
+?>
 <div class="page-header">
-	<h1>My Account</h1>
+	<h1>New Ticket</h1>
 </div>
 
 <form id="add-ticket-form" class="form" onsubmit="BackEnd.addTicket(); return false;" enctype="multipart/form-data">
@@ -18,7 +20,7 @@
 		</div>
 	</div>
 
-	<h3>New Ticket</h3>
+	<h3>Submit a New Ticket</h3>
 
 	<form id="add-ticket-form" class="form" onsubmit="BackEnd.addTicket(); return false;"
 	      enctype="multipart/form-data">
@@ -29,7 +31,7 @@
 			</div>
 			<div class="col-sm-6">
 				<label for="inputName">Created By</label>
-				<input type="text" id="inputName" class="form-control" value="Tester" disabled required autofocus>
+				<input type="text" id="inputName" class="form-control" value="<?php echo $currentUser->getFirstName() . ' ' . $currentUser->getLastName() ?>" disabled required autofocus>
 			</div>
 			<div class="col-sm-4">
 				<label for="inputDate">Date</label>
@@ -43,9 +45,6 @@
 
 		<label for="inputMessage">Please describe your issue here:</label>
 		<textarea id="inputMessage" class="form-control" required></textarea>
-
-		<label for="inputAttachment">Attachment (optional):</label>
-		<input id="inputAttachment" type="file" name="attachment" class="form-control" />
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit New Ticket</button>
 

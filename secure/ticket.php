@@ -142,9 +142,6 @@ if ( empty( $ticket ) ) {
 		<label for="inputMessage">Add a message to this ticket:</label>
 		<textarea id="inputMessage" class="form-control" required></textarea>
 
-		<label for="inputAttachment">Attachment (optional):</label>
-		<input id="inputAttachment" type="file" name="attachment" class="form-control"/>
-
 		<div class="row">
 			<div class="col-sm-6">
 				<?php

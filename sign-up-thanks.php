@@ -9,4 +9,4 @@
 	</p>
 </div> <!-- inner -->
 
-<?php include( '/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

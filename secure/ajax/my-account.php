@@ -22,6 +22,10 @@ if(empty($_POST['phone_number'])) {
 	$errors[] = 'Phone number is required';
 }
 
+if(empty($_POST['cell_phone_carrier_id'])) {
+	$errors[] = 'Cell Carrier is required';
+}
+
 if(empty($_POST['email_address'])) {
 	$errors[] = 'Email Address is required';
 }

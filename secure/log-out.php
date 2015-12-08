@@ -17,4 +17,4 @@
 		BackEnd.logOutWait(3);
 	};
 </script>
-<?php include( DOCUMENT_ROOT . '/secure/foot.php' ); ?>
+<?php include( 'foot.php' ); ?>

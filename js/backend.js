@@ -29,25 +29,19 @@ var BackEnd = {
         var email_address = jQuery('#inputEmail').val();
         var password = jQuery('#inputPassword').val();
         var password_again = jQuery('#inputPasswordConfirm').val();
-        var formData = new FormData(jQuery('form').get(0));
 
-        jQuery.ajax({
-            url: "/~group4/secure/ajax/my-account.php",
-            data: formData,
-            type: 'POST',
-            enctype: "multipart/form-data",
-            processData: false,
-            cache: false,
-            contentType: false,
-            xhr: function() {  // Custom XMLHttpRequest
-                var myXhr = jQuery.ajaxSettings.xhr();
-                if(myXhr.upload){ // Check if upload property exists
-                    myXhr.upload.addEventListener('progress', function() {return true;} , false); // For handling the progress of the upload
-                }
-                return myXhr;
-            },
-            success: function (response)
+        jQuery.post(
+            "/~group4/secure/ajax/my-account.php",
             {
+                'first_name': first_name,
+                'last_name': last_name,
+                'phone_number': phone_number,
+                'cell_phone_carrier_id': cell_phone_carrier_id,
+                'email_address': email_address,
+                'password': password,
+                'password_again': password_again
+            },
+            function (response) {
                 if(response.success) {
                     jQuery('#success-container').show();
                 } else {
@@ -56,8 +50,9 @@ var BackEnd = {
                     Util.animate('#errors-container', 'shake');
                 }
                 jQuery('#throbber').hide();
-            }
-        }, 'json');
+            },
+            'json'
+        );
 
     },
 

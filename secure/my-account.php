@@ -14,7 +14,7 @@ $cell_phone_carrier = CellPhoneCarrier::loadById($currentUser->getCellPhoneCarri
 
 	<div id="errors-container">
 		<div class="alert alert-warning">
-			<strong>Required Field Missing!</strong> Your name is too short! Make it longer to show success!
+			<strong>Required Field Missing!</strong>
 		</div>
 	</div>
 
