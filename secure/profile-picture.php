@@ -94,7 +94,7 @@ if(@$_POST['verb'] == 'update-profile-picture') {
 			jQuery("#container_image").PictureCut({
 				InputOfImageDirectory       : "profile-picture",
 				PluginFolderOnServer        : "/~group4/vendor/picture-cut/",
-				FolderOnServer              : "/~group4/images/uploads/",
+				FolderOnServer              : "/images/uploads/",
 				EnableCrop                  : false,
 				ActionToSubmitUpload        : "/~group4/secure/ajax/update-profile-picture.php",
 				DefaultImageButton          : "<?php echo $profile_src ?>"

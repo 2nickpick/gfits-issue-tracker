@@ -32,8 +32,7 @@ $cell_phone_carrier = CellPhoneCarrier::loadById($currentUser->getCellPhoneCarri
 		$profile_src = '/~group4/images/default.png';
 	}
 	?>
-	<a href="/~group4/secure/profile-picture.php"><img class="profile-picture" src="<?php echo $profile_src ?>" /></a><br />
-	<a href="/~group4/secure/profile-picture.php">Edit Profile Picture</a>
+	<img class="profile-picture" src="<?php echo $profile_src ?>" /><br />
 
 	<h3>Basic Information</h3>
 	<label for="inputFName" class="sr-only">First Name</label>

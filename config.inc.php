@@ -5,8 +5,8 @@ date_default_timezone_set('America/New_York');
 
 /* set up PDO connection */
 define('DB_NAME', 'group4');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_USER', 'group4');
+define('DB_PASS', 'Fall2015376549');
 define('DB_HOST', 'localhost');
 
 global $con;
@@ -21,7 +21,7 @@ catch (PDOException $err) {
 }
 
 /* Set up defines */
-define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/~group4/');
+$_SERVER['DOCUMENT_ROOT'] = '/home/group4/public_html';
 
 /* Include relevant classes */
 include 'includes/Users.inc.php';
