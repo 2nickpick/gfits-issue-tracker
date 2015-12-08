@@ -1,0 +1,26 @@
+Final Group Project
+Nicholas Pickering
+Felicitas Carter
+Brandon Luckham
+Joshua Villoria
+
+Our Final Group Project is an Issue Tracking System, named GFITS, which allows businesses and customers to communicate
+about issues effectively.
+
+This project is responsive, and is user-friendly on small screens.
+
+A user manual is provided with this project at user-f.docx.
+
+An ERD diagram is available at the end of the user manual.
+
+Link to Group Project
+http://192.168.100.66/~group4/index.php
+
+Styles
+	This project heavily utilized the Bootstrap framework.
+
+
+Images
+    images/throbber.gif - https://upload.wikimedia.org/wikipedia/en/2/29/Throbber-Loadinfo-292929-ffffff.gif
+    images/businessbg.jpg - http://www.huffingtonpost.com/hila-mehr/social-entrepreneurs-reme_b_5646428.html
+
