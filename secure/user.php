@@ -137,7 +137,6 @@ if ( empty( $_GET['users_id'] ) ) {
 		<div class="col-sm-12">
 			<input class="form-control btn btn-primary" type="submit" value="Save User"/>
 		</div>
-		</div>
 	</form>
 	<?php
 }
