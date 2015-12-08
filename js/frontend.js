@@ -43,7 +43,7 @@ var FrontEnd = {
             function(response) {
                 if(response.success) {
                     // message successfully sent
-                    window.location.href = '/~group4/sign-up-thanks.php';
+                    window.location.href = response.success_url;
                 } else {
                     // log in failed
                     jQuery('#errors-container .alert').html(response.error);
