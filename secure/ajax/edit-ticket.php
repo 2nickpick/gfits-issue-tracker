@@ -19,12 +19,17 @@ if(empty($ticket)) {
 	$errors[] = 'No ticket was found.';
 }
 
+$statuses_id = $ticket->isOpen() ? 1 : 5;
+if(!empty($_POST['statuses_id'])) {
+	$statuses_id = intval($_POST['statuses_id']);
+}
+
 if(empty($errors)) {
 	$ticket_note = new TicketNote(
 		array(
 			'ticket' => array('id' => $_POST['tickets_id']),
 			'user' => array('id' => $currentUser->getId()),
-			'status' => array('id' => 1),
+			'status' => array('id' => $statuses_id),
 			'note_text' => $_POST['message'],
 			'date' => time()
 		)

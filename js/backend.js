@@ -88,7 +88,7 @@ var BackEnd = {
         );
     },
 
-    updateTicket: function () {
+    updateTicket: function (statuses_id) {
 
         jQuery('#success-container').hide();
         jQuery('#errors-container').hide();
@@ -100,9 +100,14 @@ var BackEnd = {
         var message = jQuery('#inputMessage').val();
         var tickets_id = jQuery('#inputTicketsId').val();
 
+        if(typeof(statuses_id) === 'undefined') {
+            statuses_id = '';
+        }
+
         jQuery.post(
             "/~group4/secure/ajax/edit-ticket.php",
             {
+                'statuses_id': statuses_id,
                 'tickets_id': tickets_id,
                 'message': message
             },
@@ -355,7 +360,7 @@ var BackEnd = {
             },
             'json'
         );
-    }
+    },
 };
 
 BackEnd.init();

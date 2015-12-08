@@ -77,7 +77,13 @@ if ( empty( $ticket ) ) {
 						</strong>
 					</p>
 
-					<p><span class="label label-default">Trusted Staff Member</span></p>
+					<?php
+					if($note->getUser()->getTypeId() != 1) {
+						?>
+						<p><span class="label label-default">Trusted Staff Member</span></p>
+						<?php
+					}
+					?>
 
 					<p><strong><?php echo date( 'M d, Y h:i A', $note->getDate()) ?></strong></p>
 				</div>
@@ -93,14 +99,9 @@ if ( empty( $ticket ) ) {
 	<form id="update-ticket-form" class="form" onsubmit="BackEnd.updateTicket(); return false;"
 	      enctype="multipart/form-data">
 		<input type="hidden" name="tickets_id" id="inputTicketsId" value="<?php echo $ticket->getId() ?>" />
+		<input type="hidden" name="statuses_id" id="inputStatusesId" value="" />
 
 		<hr/>
-
-		<div id="errors-container">
-			<div class="alert alert-warning">
-				<strong>Required Field Missing!</strong>
-			</div>
-		</div>
 
 		<h3>Add a Response</h3>
 
@@ -147,11 +148,11 @@ if ( empty( $ticket ) ) {
 				<?php
 				if ( $ticket->isOpen() ) {
 					?>
-					<button class="btn btn-lg btn-success btn-block" type="submit">Add Note and Close Ticket</button>
+					<button class="btn btn-lg btn-success btn-block" onclick="BackEnd.updateTicket(5);">Add Note and Close Ticket</button>
 					<?php
 				} else {
 					?>
-					<button class="btn btn-lg btn-warning btn-block" type="submit">Add Note and Reopen Ticket</button>
+					<button class="btn btn-lg btn-warning btn-block" onclick="BackEnd.updateTicket(1);">Add Note and Reopen Ticket</button>
 					<?php
 				}
 				?>

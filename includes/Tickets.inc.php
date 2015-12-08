@@ -689,12 +689,14 @@ class TicketNote
                 jUser.FirstName as user_first_name,
                 jUser.LastName as user_last_name,
                 jUser.ProfilePicture as user_profile_picture,
+                tLogin.TypeID AS user_type_id,
 
                 tTicketNote.StatusID as status_id,
                 UNIX_TIMESTAMP(tTicketNote.NoteDate) AS note_date,
                 tTicketNote.NoteText AS note_text
             FROM tTicketNote
             LEFT JOIN tUser jUser ON jUser.UserID = tTicketNote.UserID
+            LEFT JOIN tLogin ON tLogin.UserID = jUser.UserID
             ' . $where . '
             ' . $order_by . '';
 
@@ -716,7 +718,8 @@ class TicketNote
 							'id' => $row['user_id'],
 							'first_name' => $row['user_first_name'],
 							'last_name' => $row['user_last_name'],
-							'profile_picture' => $row['user_profile_picture']
+							'profile_picture' => $row['user_profile_picture'],
+							'type_id' => $row['user_type_id']
 						),
 						'status'   => array(
 							'id' => $row['status_id']
