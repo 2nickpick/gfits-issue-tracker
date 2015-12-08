@@ -96,7 +96,7 @@ if ( empty( $ticket ) ) {
 	}
 	?>
 
-	<form id="update-ticket-form" class="form" onsubmit="BackEnd.updateTicket(); return false;"
+	<form id="update-ticket-form" class="form"
 	      enctype="multipart/form-data">
 		<input type="hidden" name="tickets_id" id="inputTicketsId" value="<?php echo $ticket->getId() ?>" />
 		<input type="hidden" name="statuses_id" id="inputStatusesId" value="" />
@@ -158,7 +158,7 @@ if ( empty( $ticket ) ) {
 				?>
 			</div>
 			<div class="col-sm-6">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Add Note</button>
+				<button class="btn btn-lg btn-primary btn-block" onclick="BackEnd.updateTicket();">Add Note</button>
 			</div>
 		</div>
 
