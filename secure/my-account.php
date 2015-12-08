@@ -24,6 +24,17 @@ $cell_phone_carrier = CellPhoneCarrier::loadById($currentUser->getCellPhoneCarri
 		</div>
 	</div>
 
+	<h3>Profile Picture</h3>
+	<?php
+	if(!empty($currentUser->getProfilePicture())) {
+		$profile_src = '/~group4/images/uploads/' . $currentUser->getProfilePicture();
+	} else {
+		$profile_src = '/~group4/images/default.png';
+	}
+	?>
+	<a href="/~group4/secure/profile-picture.php"><img class="profile-picture" src="<?php echo $profile_src ?>" /></a><br />
+	<a href="/~group4/secure/profile-picture.php">Edit Profile Picture</a>
+
 	<h3>Basic Information</h3>
 	<label for="inputFName" class="sr-only">First Name</label>
 	<input type="text" id="inputFName" class="form-control" value="<?php echo $currentUser->getFirstName() ?>"
@@ -53,12 +64,6 @@ $cell_phone_carrier = CellPhoneCarrier::loadById($currentUser->getCellPhoneCarri
 		}
 		?>
 	</select>
-
-	<h3>Profile Picture</h3>
-	<h4>Preview</h4>
-	<img class="profile-picture" src="/~group4/images/default.png" />
-	<label for="inputName" class="sr-only">Name</label>
-	<input type="file" id="inputProfilePicture" class="form-control">
 
 	<h3>Password</h3>
 	<p>Leave this group blank to keep existing password. </p>
